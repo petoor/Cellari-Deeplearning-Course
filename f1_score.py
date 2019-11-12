@@ -23,8 +23,8 @@ class ColorChange:
             mask[np.sum(img == color_value, axis=2) == 4] = i
         return mask
 
-project = 'gland_images'
-dataset = 'gland'
+project = 'drone_images'
+dataset = 'drone_data_brazil'
 
 annotations_path = os.getcwd()+os.sep+project+os.sep+dataset+'/test/annotations'
 predictions_path = os.getcwd()+os.sep+project+os.sep+dataset+'/test/predictions'
@@ -53,4 +53,4 @@ f = open(score_path+"/f1_score.txt", "w")
 f.write("The f1 score is : {0}".format(f1))
 f.close()
 
-print("F1 score calculated for {0}".format(dataset))
+print("F1 score for {0} is {1}".format(dataset, f1))
