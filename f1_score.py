@@ -23,8 +23,8 @@ class ColorChange:
             mask[np.sum(img == color_value, axis=2) == 4] = i
         return mask
 
-project = 'drone_images'
-dataset = 'drone_data_brazil'
+project = 'gland_images'
+dataset = 'gland'
 
 annotations_path = os.getcwd()+os.sep+project+os.sep+dataset+'/test/annotations'
 predictions_path = os.getcwd()+os.sep+project+os.sep+dataset+'/test/predictions'
@@ -32,6 +32,7 @@ score_path = os.getcwd()+os.sep+project+os.sep+dataset
 
 annotations_list = sorted(glob.glob(annotations_path+'/*.png'))
 predictions_list = sorted(glob.glob(predictions_path+'/*.png'))
+
 f1 = 0
 
 for idx in range(len(predictions_list)):
@@ -46,7 +47,7 @@ for idx in range(len(predictions_list)):
             continue
     y_pred = (pred==classes)*1
     y_true = (anno==classes)*1
-    f1 += f1_score(y_true.reshape(-1), y_pred.reshape(-1))
+    f1 += f1_score(y_true.reshape(-1), y_pred.reshape(-1), average='macro')
 
 f1 /= len(predictions_list)
 f = open(score_path+"/f1_score.txt", "w")
